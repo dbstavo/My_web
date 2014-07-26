@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+   <ui:composition template="/template.xhtml">
+      <ui:define name="title">
+         <h:outputText value="#{bundle.ListNombreTitle}"></h:outputText>
+      </ui:define>
+      <ui:define name="body">
+         <h:form styleClass="jsfcrud_list_form">
+            <h:panelGroup id="messagePanel" layout="block">
+               <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:outputText escape="false" value="#{bundle.ListNombreEmpty}" rendered="#{nombreController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{nombreController.items.rowCount > 0}">
+               <h:outputText value="#{nombreController.pagination.pageFirstItem + 1}..#{nombreController.pagination.pageLastItem + 1}/#{nombreController.pagination.itemsCount}"/>&nbsp;
+               <h:commandLink action="#{nombreController.previous}" value="#{bundle.Previous} #{nombreController.pagination.pageSize}" rendered="#{nombreController.pagination.hasPreviousPage}"/>&nbsp;
+               <h:commandLink action="#{nombreController.next}" value="#{bundle.Next} #{nombreController.pagination.pageSize}" rendered="#{nombreController.pagination.hasNextPage}"/>&nbsp;
+               <h:dataTable value="#{nombreController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="#{bundle.ListNombreTitle_idNombre}"/>
+                     </f:facet>
+                     <h:outputText value="#{item.idNombre}"/>
+                  </h:column>
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="#{bundle.ListNombreTitle_nombrecol}"/>
+                     </f:facet>
+                     <h:outputText value="#{item.nombrecol}"/>
+                  </h:column>
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="#{bundle.ListNombreTitle_apellido}"/>
+                     </f:facet>
+                     <h:outputText value="#{item.apellido}"/>
+                  </h:column>
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="#{bundle.ListNombreTitle_fechanac}"/>
+                     </f:facet>
+                     <h:outputText value="#{item.fechanac}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                     </h:outputText>
+                  </h:column>
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="&nbsp;"/>
+                     </f:facet>
+                     <h:commandLink action="#{nombreController.prepareView}" value="#{bundle.ListNombreViewLink}"/>
+                     <h:outputText value=" "/>
+                     <h:commandLink action="#{nombreController.prepareEdit}" value="#{bundle.ListNombreEditLink}"/>
+                     <h:outputText value=" "/>
+                     <h:commandLink action="#{nombreController.destroy}" value="#{bundle.ListNombreDestroyLink}"/>
+                  </h:column>
+               </h:dataTable>
+            </h:panelGroup>
+            <br />
+            <h:commandLink action="#{nombreController.prepareCreate}" value="#{bundle.ListNombreCreateLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ListNombreIndexLink}"/>
+         </h:form>
+      </ui:define>
+   </ui:composition>
+
+</html>

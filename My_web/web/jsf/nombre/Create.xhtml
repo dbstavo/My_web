@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+   <ui:composition template="/template.xhtml">
+      <ui:define name="title">
+         <h:outputText value="#{bundle.CreateNombreTitle}"></h:outputText>
+      </ui:define>
+      <ui:define name="body">
+         <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+         </h:panelGroup>
+         <h:form>
+            <h:panelGrid columns="2">
+               <h:outputLabel value="#{bundle.CreateNombreLabel_idNombre}" for="idNombre" />
+               <h:inputText id="idNombre" value="#{nombreController.selected.idNombre}" title="#{bundle.CreateNombreTitle_idNombre}" required="true" requiredMessage="#{bundle.CreateNombreRequiredMessage_idNombre}"/>
+               <h:outputLabel value="#{bundle.CreateNombreLabel_nombrecol}" for="nombrecol" />
+               <h:inputText id="nombrecol" value="#{nombreController.selected.nombrecol}" title="#{bundle.CreateNombreTitle_nombrecol}" required="true" requiredMessage="#{bundle.CreateNombreRequiredMessage_nombrecol}"/>
+               <h:outputLabel value="#{bundle.CreateNombreLabel_apellido}" for="apellido" />
+               <h:inputText id="apellido" value="#{nombreController.selected.apellido}" title="#{bundle.CreateNombreTitle_apellido}" required="true" requiredMessage="#{bundle.CreateNombreRequiredMessage_apellido}"/>
+               <h:outputLabel value="#{bundle.CreateNombreLabel_fechanac}" for="fechanac" />
+               <h:inputText id="fechanac" value="#{nombreController.selected.fechanac}" title="#{bundle.CreateNombreTitle_fechanac}" required="true" requiredMessage="#{bundle.CreateNombreRequiredMessage_fechanac}">
+                  <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+               </h:inputText>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{nombreController.create}" value="#{bundle.CreateNombreSaveLink}" />
+            <br />
+            <br />
+            <h:commandLink action="#{nombreController.prepareList}" value="#{bundle.CreateNombreShowAllLink}" immediate="true"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.CreateNombreIndexLink}"/>
+         </h:form>
+      </ui:define>
+   </ui:composition>
+
+</html>

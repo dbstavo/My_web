@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+   <ui:composition template="/template.xhtml">
+      <ui:define name="title">
+         <h:outputText value="#{bundle.EditNombreTitle}"></h:outputText>
+      </ui:define>
+      <ui:define name="body">
+         <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+         </h:panelGroup>
+         <h:form>
+            <h:panelGrid columns="2">
+               <h:outputLabel value="#{bundle.EditNombreLabel_idNombre}" for="idNombre" />
+               <h:inputText id="idNombre" value="#{nombreController.selected.idNombre}" title="#{bundle.EditNombreTitle_idNombre}" required="true" requiredMessage="#{bundle.EditNombreRequiredMessage_idNombre}"/>
+               <h:outputLabel value="#{bundle.EditNombreLabel_nombrecol}" for="nombrecol" />
+               <h:inputText id="nombrecol" value="#{nombreController.selected.nombrecol}" title="#{bundle.EditNombreTitle_nombrecol}" required="true" requiredMessage="#{bundle.EditNombreRequiredMessage_nombrecol}"/>
+               <h:outputLabel value="#{bundle.EditNombreLabel_apellido}" for="apellido" />
+               <h:inputText id="apellido" value="#{nombreController.selected.apellido}" title="#{bundle.EditNombreTitle_apellido}" required="true" requiredMessage="#{bundle.EditNombreRequiredMessage_apellido}"/>
+               <h:outputLabel value="#{bundle.EditNombreLabel_fechanac}" for="fechanac" />
+               <h:inputText id="fechanac" value="#{nombreController.selected.fechanac}" title="#{bundle.EditNombreTitle_fechanac}" required="true" requiredMessage="#{bundle.EditNombreRequiredMessage_fechanac}">
+                  <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+               </h:inputText>
+            </h:panelGrid>
+            <h:commandLink action="#{nombreController.update}" value="#{bundle.EditNombreSaveLink}"/>
+            <br />
+            <br />
+            <h:link outcome="View" value="#{bundle.EditNombreViewLink}"/>
+            <br />
+            <h:commandLink action="#{nombreController.prepareList}" value="#{bundle.EditNombreShowAllLink}" immediate="true"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.EditNombreIndexLink}" />
+         </h:form>
+      </ui:define>
+   </ui:composition>
+
+</html>
